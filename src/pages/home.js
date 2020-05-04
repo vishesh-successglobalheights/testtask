@@ -45,14 +45,14 @@ class Home extends React.Component {
     return (
       <div>
         <div>
-          <table>
-            <thead>
+          <table className="table table-striped table-dark">
+            <thead className="thead-dark">
 
             <tr>
-              <th>Title</th>
-              <th>URL </th>
-              <th>Created Date</th>
-              <th>Author</th>
+              <th scope="col">Title</th>
+              <th scope="col">URL </th>
+              <th scope="col">Created Date</th>
+              <th scope="col">Author</th>
             </tr>
             </thead>
             <tbody>

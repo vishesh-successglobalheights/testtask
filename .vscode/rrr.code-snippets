@@ -1,0 +1,17 @@
+{
+	"myreducer": {
+		"scope": "javascriptreact",
+		"prefix": "hello",
+		"body": [
+			"const intialstate = {};",
+			"let ${1:ReducerName} = (state = intialstate, action) => {",
+			"switch (action.type) {",
+			"default:",
+			"return { ...state };",
+			"}",
+			"};",
+			"export default ${1:ReducerName};"
+		],
+		"description": "Create react Reducer"
+	}
+}

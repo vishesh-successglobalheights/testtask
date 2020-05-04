@@ -1,11 +1,12 @@
 import React from "react";
+import ReactJson from "react-json-view";
 
 class PageTwo extends React.Component {
   render() {
-      console.log("onpage two",this.props)
+    const { json } = this.props.location.state;
     return (
-      <div class="card text-white bg-primary">
-        <button className="card border-primary">pageTwo</button>
+      <div className="card">
+        <ReactJson theme="monokai" src={json} />
       </div>
     );
   }

@@ -1,23 +1,87 @@
 import React from "react";
+import { connect } from "react-redux";
+import { GetApiData} from "../store/Actions/systemAction";
 
+let intervalRef = undefined;
 class Home extends React.Component {
- 
-
-  render() {
-    const { history } = this.props;
+  componentDidMount() {
+    const { GetApiData} = this.props;
+  
+    intervalRef = setInterval(() => {
+      GetApiData(true);
+    }, 3000);
+  }
+  componentWillUnmount() {
+    window.clearInterval(intervalRef);
+  }
+  shouldComponentUpdate(preprops, props) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  renderItems = (res) => {
+    const { data } = this.props;
+    console.log(this.props);
     return (
-      <div class="card text-white bg-primary">
-        <button
-          onClick={() => {
-            console.log("pressed", this.props);
-            history.push({pathname:"/Mainpage"},{data:"vishesh"});
-          }}
-          className="card border-primary"
-        >
-          Home Page
-        </button>
+      <div>
+        {data.map((item) => {
+          return (
+            <div>
+              <p>title:{item.title}</p>
+              <p>url:{item.url}</p>
+              <p>created at:{item.created_at}</p>
+              <p>author:{item.author}</p>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+ 
+  render() {
+    const { history, data } = this.props;
+    return (
+      <div>
+        <div>
+          <table>
+            <thead>
+
+            <tr>
+              <th>Title</th>
+              <th>URL </th>
+              <th>Created Date</th>
+              <th>Author</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {data.map((item,key) => {
+              return (
+                <tr
+                key={key}
+                onClick={() => {
+                  history.push("/Mainpage", { json: item });
+                }}
+                >
+                  <td>{item.title}</td>
+                  <td>{item.url}</td>
+                  <td>{item.created_at}</td>
+                  <td>{item.author}</td>
+                </tr>
+              );
+            })}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
 }
-export default Home;
+const mapstatetoprop = (state) => {
+   return {
+    data: state.APIData.data,
+  };
+};
+export default connect(mapstatetoprop, { GetApiData })(Home);

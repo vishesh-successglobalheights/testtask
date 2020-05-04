@@ -1,11 +1,11 @@
 import React from 'react';
 import{Switch,Route}from"react-router-dom"
 import Home from "./pages/home";
-import Mainpage from"./pages/pagetwo"
+import jsonPage from"./pages/jsonPage"
 const Main = () => (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/Mainpage" component={Mainpage} />
+      <Route path="/Mainpage" component={jsonPage} />
     </Switch>
   );
 

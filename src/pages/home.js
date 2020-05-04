@@ -9,7 +9,7 @@ class Home extends React.Component {
 
     intervalRef = setInterval(() => {
       GetApiData(true);
-    }, 3000);
+    }, 10000);
   }
   componentWillUnmount() {
     window.clearInterval(intervalRef);
